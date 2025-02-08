@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rust Launcher - Скачать лаунчер</title>
+    <!-- Шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Наши стили -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="images/rust-icon.svg" alt="Rust Icon">
+            </div>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#features">Особенности</a></li>
+                    <li><a href="#social">Сообщество</a></li>
+                    <li><a href="#download">Скачать</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <div class="nav-social">
+                        <a href="https://discord.gg/u7w3VvSuBJ" class="discord" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="https://github.com/publicrust/rust-launcher" class="github" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://t.me/skulidropek" class="telegram" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                    </div>
+                    <div class="theme-switch">
+                        <input type="checkbox" id="theme-toggle">
+                        <label for="theme-toggle" class="theme-switch-label">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
+        <div class="container">
+            <h1>Rust Launcher</h1>
+
+            <div class="launcher-info">
+                <h2>Net Launcher</h2>
+                <p>Ваш идеальный компаньон для игры в Rust. Современный лаунчер на базе .NET, созданный специально для быстрого и удобного доступа к серверам Rust. Автоматические обновления, оптимизация производительности и улучшенный игровой опыт — всё
+                    в одном приложении.</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Особенности</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3>Автообновление</h3>
+                    <p>Всегда актуальная версия игры</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Быстрый старт</h3>
+                    <p>Моментальный запуск игры</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <h3>Оптимизация</h3>
+                    <p>Улучшенная производительность</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="latest-news">
+        <div class="container">
+            <h2>Последние новости</h2>
+            <div class="news-grid" id="news-container">
+                <!-- Сюда будут загружаться новости -->
+            </div>
+        </div>
+    </section>
+
+    <section class="download-section" id="download">
+        <div class="container">
+            <div class="download-card">
+                <h2>Скачать лаунчер</h2>
+                <a href="https://github.com/publicrust/rust-launcher/releases/latest/download/LauncherCsharp.exe" class="download-button" id="downloadButton">
+                    <i class="fas fa-download"></i> Скачать
+                </a>
+                <div class="version-info">
+                    <span id="version">Версия: 1.0.0</span>
+                    <span id="size">Размер: ~25 МБ</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social" id="social">
+        <div class="container">
+            <h2>Присоединяйтесь к нам</h2>
+            <div class="social-grid">
+                <a href="https://discord.gg/u7w3VvSuBJ" class="social-card discord" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-discord"></i>
+                    <h3>Discord</h3>
+                    <p>Наше сообщество</p>
+                </a>
+                <a href="https://github.com/publicrust/rust-launcher" class="social-card github" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                    <h3>GitHub</h3>
+                    <p>Исходный код проекта</p>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>О проекте</h3>
+                    <p>Rust проект утилит для игры Rust.</p>
+                    <p>© 2025 Rust Project. Все права защищены.</p>
+                </div>
+                <div class="footer-links">
+
+                    <h3>Полезные ссылки</h3>
+                    <ul>
+                        <li><a href="#features">Особенности</a></li>
+                        <li><a href="#social">Сообщество</a></li>
+                        <li><a href="#download">Скачать</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Контакты</h3>
+                    <p>Discord: https://discord.gg/u7w3VvSuBJ</p>
+                    <p>Техническая поддержка: @waymall</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/smooth-scroll.js"></script>
+    <script src="js/theme-switcher.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1530 @@
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+:root {
+    /* Светлая тема (по умолчанию) */
+    --primary-color: #8B5CF6;
+    --primary-light: #A78BFA;
+    --secondary-color: #7C3AED;
+    --background-color: #F8FAFC;
+    /* Очень светлый серо-голубой */
+    --text-color: #2D3748;
+    --heading-color: #1A202C;
+    --card-background: #ffffff;
+    --accent-color: #6D28D9;
+    --border-radius: 15px;
+    --shadow-color: rgba(139, 92, 246, 0.15);
+    --gradient: linear-gradient(135deg, #8B5CF6, #6D28D9);
+    --navbar-bg: rgba(255, 255, 255, 0.95);
+    --card-text: #4A5568;
+    --gradient-bg: linear-gradient( 135deg, rgba(248, 250, 252, 0.8), rgba(241, 245, 249, 0.8));
+    --texture-color-1: rgba(139, 92, 246, 0.02);
+    --texture-color-2: rgba(139, 92, 246, 0.015);
+    --gradient-light: rgba(139, 92, 246, 0.03);
+    --background-overlay: rgba(248, 250, 252, 0.97);
+    --gradient-1: rgba(139, 92, 246, 0.08);
+    --gradient-2: rgba(124, 58, 237, 0.06);
+    --gradient-3: rgba(139, 92, 246, 0.05);
+    /* Overlay для читаемости */
+}
+
+
+/* Темная тема */
+
+[data-theme="dark"] {
+    --primary-color: #A78BFA;
+    --primary-light: #8B5CF6;
+    --secondary-color: #7C3AED;
+    --background-color: #111827;
+    --text-color: #E5E7EB;
+    --heading-color: #F3F4F6;
+    --card-background: #1F2937;
+    --accent-color: #8B5CF6;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --navbar-bg: rgba(31, 41, 55, 0.95);
+    --card-text: #D1D5DB;
+    --texture-color-1: rgba(139, 92, 246, 0.03);
+    --texture-color-2: rgba(139, 92, 246, 0.02);
+    --gradient-light: rgba(139, 92, 246, 0.05);
+    --gradient-1: rgba(139, 92, 246, 0.12);
+    --gradient-2: rgba(124, 58, 237, 0.09);
+    --gradient-3: rgba(139, 92, 246, 0.07);
+}
+
+
+/* Reset and Base Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.5s ease, background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+}
+
+body {
+    font-family: 'Rajdhani', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    position: relative;
+    background-image: radial-gradient(1500px circle at 0% 0%, var(--gradient-1) 0%, transparent 70%), radial-gradient(1500px circle at 100% 100%, var(--gradient-2) 0%, transparent 70%), radial-gradient(800px circle at 50% 0%, var(--gradient-3) 0%, transparent 70%), radial-gradient(800px circle at 50% 100%, var(--gradient-3) 0%, transparent 70%);
+    background-attachment: fixed;
+    transition: background-color 0.5s ease;
+    min-height: 100vh;
+    margin: 0;
+    background: transparent;
+}
+
+body::before {
+    display: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+
+/* Navigation */
+
+.navbar {
+    background: var(--navbar-bg);
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 20px var(--shadow-color);
+    backdrop-filter: blur(10px);
+    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.logo:hover img {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+[data-theme="light"] .logo img {
+    filter: brightness(0.4);
+}
+
+[data-theme="dark"] .logo img {
+    filter: brightness(0.9);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    position: relative;
+    padding: 5px 0;
+    transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+
+/* Добавляем стили для социальных кнопок в навигации */
+
+.nav-social {
+    display: flex;
+    gap: 15px;
+    margin-right: 20px;
+}
+
+.nav-social a {
+    color: var(--text-color);
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+    padding: 8px;
+    border-radius: 50%;
+    background: var(--card-background);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+
+/* Стили для темной темы */
+
+[data-theme="dark"] .nav-social a {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+
+/* Стили для светлой темы */
+
+[data-theme="light"] .nav-social a {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+
+/* Ховер эффекты */
+
+.nav-social a.discord:hover {
+    color: #7289DA;
+    background: rgba(114, 137, 218, 0.1);
+    box-shadow: 0 0 15px rgba(114, 137, 218, 0.3);
+    transform: translateY(-2px);
+}
+
+.nav-social a.github:hover {
+    color: #6e5494;
+    background: rgba(110, 84, 148, 0.1);
+    box-shadow: 0 0 15px rgba(110, 84, 148, 0.3);
+    transform: translateY(-2px);
+}
+
+.nav-social a.telegram:hover {
+    color: #0088cc;
+    background: rgba(0, 136, 204, 0.1);
+    box-shadow: 0 0 15px rgba(0, 136, 204, 0.3);
+    transform: translateY(-2px);
+}
+
+
+/* Дополнительные стили для светлой темы при ховере */
+
+[data-theme="light"] .nav-social a:hover {
+    border-color: transparent;
+}
+
+
+/* Добавляем плавный скроллинг для всей страницы */
+
+html {
+    scroll-behavior: smooth;
+    min-height: 100%;
+    background-color: var(--background-color);
+    background-image: radial-gradient(1500px circle at 0% 0%, var(--gradient-1) 0%, transparent 70%), radial-gradient(1500px circle at 100% 100%, var(--gradient-2) 0%, transparent 70%), radial-gradient(800px circle at 50% 0%, var(--gradient-3) 0%, transparent 70%), radial-gradient(800px circle at 50% 100%, var(--gradient-3) 0%, transparent 70%);
+    background-attachment: fixed;
+    transition: background-color 0.5s ease;
+}
+
+
+/* Обновляем стили навигации */
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-left: 20px;
+    border-left: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+
+/* Hero Section */
+
+.hero {
+    padding: 180px 0 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+}
+
+.hero h1 {
+    font-size: 72px;
+    margin-bottom: 20px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInUp 1s ease-out;
+    transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero p {
+    font-size: 24px;
+    margin-bottom: 40px;
+    color: var(--text-color);
+    animation: fadeInUp 1s ease-out 0.2s backwards;
+    transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Добавляем стили для темной темы */
+
+[data-theme="dark"] .hero {
+    background: linear-gradient(rgba(17, 24, 39, 0.9), rgba(17, 24, 39, 0.9));
+}
+
+[data-theme="dark"] .hero h1 {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--text-color);
+    transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] .hero p {
+    color: var(--text-color);
+    transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Download Section */
+
+.download-section {
+    padding: 100px 0;
+    position: relative;
+}
+
+.download-card {
+    background: var(--card-background);
+    padding: 50px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 30px var(--shadow-color);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    transform: translateY(0);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.download-card:hover {
+    transform: translateY(-5px);
+}
+
+
+/* Базовые стили для карточки загрузки */
+
+.download-card {
+    text-align: center;
+}
+
+
+/* Специфичные стили для кнопки */
+
+.download-card .download-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    color: white !important;
+    text-decoration: none !important;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    gap: 8px;
+    margin: 20px 0;
+    position: relative;
+    z-index: 1;
+}
+
+
+/* Стили при наведении */
+
+.download-card .download-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    color: white !important;
+    text-decoration: none !important;
+}
+
+
+/* Стили для иконки */
+
+.download-card .download-button i,
+.download-card .download-button svg {
+    color: white !important;
+    margin-right: 8px;
+}
+
+
+/* Дополнительные состояния */
+
+.download-card .download-button:visited,
+.download-card .download-button:active,
+.download-card .download-button:focus {
+    color: white !important;
+    text-decoration: none !important;
+    background-color: var(--primary-color);
+}
+
+
+/* Стили для информации о версии */
+
+.download-card .version-info {
+    margin-top: 10px;
+    color: var(--text-color);
+}
+
+.download-card p {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+[data-theme="light"] .download-card p {
+    color: var(--text-color);
+    opacity: 0.75;
+}
+
+[data-theme="dark"] .download-card p {
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+
+/* Features Section */
+
+.features {
+    padding: 100px 0;
+    background: var(--gradient-bg);
+    position: relative;
+    background: transparent;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    position: relative;
+}
+
+.feature-card {
+    background: var(--card-background);
+    padding: 40px 30px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    box-shadow: 0 4px 15px rgba(148, 163, 184, 0.1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(148, 163, 184, 0.15);
+    border-color: rgba(139, 92, 246, 0.1);
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient( 135deg, rgba(248, 250, 252, 0.5), rgba(241, 245, 249, 0.5));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.feature-card h3 {
+    color: var(--heading-color);
+    margin: 20px 0 15px;
+    position: relative;
+    font-size: 24px;
+}
+
+.feature-card p {
+    color: var(--text-color);
+    opacity: 0.8;
+    position: relative;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+
+/* Стили для иконок в feature-card */
+
+.feature-card i,
+.feature-card img,
+.feature-card svg {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+
+/* Стили при наведении */
+
+.feature-card:hover i,
+.feature-card:hover img,
+.feature-card:hover svg {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+
+/* Специальные стили для светлой темы */
+
+[data-theme="light"] .feature-card:hover i,
+[data-theme="light"] .feature-card:hover img,
+[data-theme="light"] .feature-card:hover svg {
+    color: var(--primary-color);
+    opacity: 0.8;
+}
+
+
+/* Специальные стили для темной темы */
+
+[data-theme="dark"] .feature-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .feature-card:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.2);
+    transform: translateY(-5px);
+}
+
+[data-theme="dark"] .feature-card::before {
+    content: none;
+}
+
+[data-theme="dark"] .feature-card i,
+[data-theme="dark"] .feature-card img,
+[data-theme="dark"] .feature-card svg {
+    color: var(--primary-light);
+}
+
+[data-theme="dark"] .feature-card:hover i,
+[data-theme="dark"] .feature-card:hover img,
+[data-theme="dark"] .feature-card:hover svg {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+
+/* News Section */
+
+.news-section {
+    padding: 80px 0;
+}
+
+.news-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.news-card {
+    background: var(--card-background);
+    border-radius: 12px;
+    overflow: hidden;
+    height: fit-content;
+    /* Важно! Высота по контенту */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.news-image {
+    width: 100%;
+    height: 600px;
+    /* Фиксированная высота для изображения */
+    overflow: hidden;
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-content {
+    padding: 20px;
+}
+
+.news-date {
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.9em;
+}
+
+.news-content h3 {
+    margin: 10px 0;
+    color: var(--heading-color);
+}
+
+.news-content p {
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.read-more {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+
+/* Для одной новости */
+
+@media (min-width: 768px) {
+    .news-grid:only-child {
+        grid-template-columns: minmax(300px, 600px);
+        justify-content: center;
+    }
+}
+
+
+/* Footer */
+
+.footer {
+    background: white;
+    padding: 80px 0 40px;
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.footer-logo img {
+    height: 60px;
+}
+
+.footer-info,
+.footer-links,
+.footer-contact {
+    padding: 0 20px;
+}
+
+.footer h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+    transition: color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.footer-contact p {
+    margin-bottom: 10px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gradient);
+    color: white;
+    margin: 0 10px;
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #3a3a3a;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    .hero h1 {
+        font-size: 48px;
+    }
+    .download-card {
+        margin: 0 20px;
+        padding: 30px;
+    }
+    .features-grid,
+    .news-grid,
+    .servers-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .servers-grid,
+    .community-grid {
+        grid-template-columns: 1fr;
+    }
+    .container {
+        padding: 0 15px;
+    }
+    .server-card,
+    .community-card {
+        margin: 0 10px;
+    }
+    .footer-links ul {
+        margin: 0 auto;
+    }
+    .nav-actions {
+        border-left: none;
+        padding-left: 0;
+    }
+    .nav-right {
+        gap: 15px;
+    }
+    .nav-social {
+        display: none;
+        /* Скрываем соц.сети на мобильных */
+    }
+    .theme-switch {
+        margin-left: auto;
+        /* Прижимаем к правому краю на мобильных */
+    }
+}
+
+
+/* Animations */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(5deg);
+    }
+}
+
+.feature-card {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.feature-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.feature-card:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+
+/* Latest News Section */
+
+.latest-news {
+    padding: 100px 0;
+    background: transparent;
+    /* Убираем фоновый цвет */
+    position: relative;
+    z-index: 1;
+}
+
+.latest-news .container {
+    position: relative;
+}
+
+.latest-news-card {
+    background: var(--card-background);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.latest-news-card:hover {
+    border-color: rgba(139, 92, 246, 0.2);
+    transform: translateY(-5px);
+}
+
+
+/* Стили для темной темы */
+
+[data-theme="dark"] .latest-news-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .latest-news-card:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+
+/* Обновляем заголовок секции */
+
+.latest-news h2 {
+    color: var(--heading-color);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+/* Community Section */
+
+.community {
+    padding: 80px 0;
+    background: linear-gradient(to bottom, transparent, rgba(139, 92, 246, 0.1));
+}
+
+.community h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    color: var(--text-color);
+}
+
+.community-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.community-card {
+    background: var(--card-background);
+    border: var(--card-border);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    text-align: center;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.community-card:hover {
+    transform: translateY(-5px);
+}
+
+.community-card i {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.community-card.discord i {
+    color: #7289DA;
+}
+
+.community-card.vk i {
+    color: #4C75A3;
+}
+
+.community-card h3 {
+    margin: 15px 0;
+    color: var(--text-color);
+}
+
+.community-card p {
+    color: #a8a8b3;
+    margin-bottom: 20px;
+}
+
+
+/* Стили для уникального фона */
+
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(to bottom right, #0a0a1f, #1a1a3a);
+    overflow: hidden;
+}
+
+
+/* Сетка */
+
+.grid {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background-image: linear-gradient(rgba(139, 92, 246, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+    transform: perspective(1000px) rotateX(60deg);
+    animation: gridMove 15s linear infinite;
+}
+
+
+/* Светящиеся частицы */
+
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Плавающие элементы */
+
+.floating-elements {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    mask-image: radial-gradient(circle at center, transparent 100px, black 150px);
+    -webkit-mask-image: radial-gradient(circle at center, transparent 100px, black 150px);
+}
+
+
+/* Анимации */
+
+@keyframes gridMove {
+    0% {
+        transform: perspective(1000px) rotateX(60deg) translateY(0);
+    }
+    100% {
+        transform: perspective(1000px) rotateX(60deg) translateY(40px);
+    }
+}
+
+
+/* Интерактивные элементы */
+
+.interactive-dot {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(139, 92, 246, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.4);
+}
+
+.glow {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+
+/* Стили для секции соц.сетей */
+
+.social {
+    padding: 100px 0;
+    background: var(--background-color);
+}
+
+.social h2 {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    padding: 0 20px;
+}
+
+.social-card {
+    background: var(--card-background);
+    padding: 40px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    box-shadow: 0 5px 20px var(--shadow-color);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+}
+
+.social-card:hover {
+    transform: translateY(-5px);
+}
+
+.social-card i {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.social-card.discord i {
+    color: #7289DA;
+}
+
+.social-card.vk i {
+    color: #4C75A3;
+}
+
+.social-card.telegram i {
+    color: #0088cc;
+}
+
+.social-card h3 {
+    margin-bottom: 10px;
+}
+
+
+/* Обновленные стили для переключателя темы */
+
+.theme-switch {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Полностью скрываем чекбокс */
+
+.theme-switch input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+.theme-switch-label {
+    width: 44px;
+    height: 22px;
+    background: var(--gradient);
+    border-radius: 30px;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    margin: 0;
+    /* Убираем отступы */
+}
+
+.theme-switch-label:before {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    background: white;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-switch input:checked+.theme-switch-label:before {
+    transform: translateX(22px);
+}
+
+.theme-switch-label i {
+    font-size: 12px;
+    color: white;
+    transition: opacity 0.3s ease;
+}
+
+.theme-switch input:checked+.theme-switch-label .fa-sun {
+    opacity: 0;
+}
+
+.theme-switch input:not(:checked)+.theme-switch-label .fa-moon {
+    opacity: 0;
+}
+
+
+/* Адаптивность */
+
+@media (max-width: 768px) {
+    .nav-actions {
+        border-left: none;
+        padding-left: 0;
+    }
+    .nav-right {
+        gap: 15px;
+    }
+    .nav-social {
+        display: none;
+        /* Скрываем соц.сети на мобильных */
+    }
+    .theme-switch {
+        margin-left: auto;
+        /* Прижимаем к правому краю на мобильных */
+    }
+}
+
+
+/* Обновляем существующие стили для поддержки темной темы */
+
+.card,
+.download-card,
+.feature-card,
+.server-card,
+.social-card {
+    background: var(--card-background);
+}
+
+
+/* Обновляем стили для лучшей читаемости в темной теме */
+
+[data-theme="dark"] .nav-links a {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] .footer {
+    background: var(--card-background);
+}
+
+[data-theme="dark"] .features {
+    background: var(--background-color);
+}
+
+
+/* Добавляем анимацию для градиентов */
+
+[data-theme="dark"] {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* Добавляем анимацию появления для темной темы */
+
+[data-theme="dark"] .hero,
+[data-theme="dark"] .card,
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .server-card,
+[data-theme="dark"] .social-card {
+    animation: darkModeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes darkModeIn {
+    from {
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Добавляем анимацию для светлой темы */
+
+[data-theme="light"] .hero,
+[data-theme="light"] .card,
+[data-theme="light"] .feature-card,
+[data-theme="light"] .server-card,
+[data-theme="light"] .social-card {
+    animation: lightModeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes lightModeIn {
+    from {
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+/* Стили для текста */
+
+body {
+    color: var(--text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--heading-color);
+}
+
+.card p,
+.feature-card p,
+.server-card p {
+    color: var(--card-text);
+}
+
+
+/* Специальные стили для карточки скачивания */
+
+.download-card {
+    background: var(--card-background);
+}
+
+.download-card h2 {
+    color: var(--heading-color);
+    margin-bottom: 2rem;
+}
+
+.download-button {
+    background: var(--gradient);
+    color: white;
+    /* остальные стили кнопки */
+}
+
+
+/* Сохраняем темную тему без изменений */
+
+[data-theme="dark"] body {
+    background-image: none;
+    background-color: var(--background-color);
+}
+
+[data-theme="dark"] body::before {
+    display: none;
+}
+
+
+/* Обновляем стили для hero секции */
+
+.hero {
+    padding: 180px 0 100px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: transparent;
+    /* Убираем фоновый цвет */
+}
+
+
+/* Обновляем стили для блока новостей */
+
+.news {
+    padding: 100px 0;
+    background: transparent;
+    /* Убираем фоновый цвет */
+}
+
+.news-card {
+    background: var(--card-background);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+
+/* Обновляем стили для всех основных секций */
+
+.hero,
+.features,
+.servers,
+.news,
+.download,
+.social {
+    position: relative;
+    z-index: 1;
+    background: transparent;
+}
+
+
+/* Обновляем стили для всех карточек */
+
+.feature-card,
+.server-card,
+.news-card,
+.social-card,
+.download-card {
+    background: var(--card-background);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    transition: all 0.3s ease;
+}
+
+
+/* Эффект при наведении для карточек */
+
+.feature-card:hover,
+.server-card:hover,
+.news-card:hover,
+.social-card:hover,
+.download-card:hover {
+    border-color: rgba(139, 92, 246, 0.2);
+    transform: translateY(-5px);
+}
+
+
+/* Обновляем стили для темной темы */
+
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .server-card,
+[data-theme="dark"] .news-card,
+[data-theme="dark"] .social-card,
+[data-theme="dark"] .download-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .feature-card:hover,
+[data-theme="dark"] .server-card:hover,
+[data-theme="dark"] .news-card:hover,
+[data-theme="dark"] .social-card:hover,
+[data-theme="dark"] .download-card:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+.news-item {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.news-header h3 {
+    margin: 0;
+    color: var(--heading-color);
+}
+
+.news-date {
+    color: var(--text-color);
+    opacity: 0.7;
+    font-size: 0.9em;
+}
+
+.news-content {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.news-error {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+.launcher-info {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 40px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    box-shadow: 0 4px 6px -1px var(--shadow-color), 0 2px 4px -1px var(--shadow-color), 0 0 20px rgba(139, 92, 246, 0.15);
+    transition: all 0.3s ease;
+}
+
+.launcher-info:hover {
+    transform: translateY(-5px);
+    border-color: rgba(139, 92, 246, 0.4);
+    box-shadow: 0 10px 15px -3px var(--shadow-color), 0 4px 6px -2px var(--shadow-color), 0 0 30px rgba(139, 92, 246, 0.3);
+}
+
+.launcher-info h2 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 2em;
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+}
+
+.launcher-info p {
+    color: var(--text-color);
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+
+/* Специфичные стили для светлой темы */
+
+[data-theme="light"] .launcher-info {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(139, 92, 246, 0.15);
+}
+
+[data-theme="light"] .launcher-info:hover {
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+
+/* Специфичные стили для темной темы */
+
+[data-theme="dark"] .launcher-info {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: rgba(139, 92, 246, 0.2);
+}
+
+[data-theme="dark"] .launcher-info:hover {
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+.launcher-features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-color);
+}
+
+.feature i {
+    color: var(--primary-color);
+    font-size: 1.2em;
+}
+
+.social-card.github {
+    background: var(--card-background);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-card.github:hover {
+    border-color: #6e5494;
+    box-shadow: 0 0 30px rgba(110, 84, 148, 0.3);
+}
+
+.social-card.github i {
+    color: #6e5494;
+}
+
+
+/* Для светлой темы */
+
+[data-theme="light"] .social-card.github {
+    border-color: rgba(110, 84, 148, 0.2);
+}
+
+[data-theme="light"] .social-card.github:hover {
+    border-color: #6e5494;
+}
