@@ -36,11 +36,11 @@ async function fetchServerInfo(serverId) {
         if (data && data.response) {
             return data.response;
         } else {
-            console.error('Неверная структура данных:', data);
+            console.error('Invalid data structure:', data);
             return null;
         }
     } catch (error) {
-        console.error(`Ошибка при получении данных сервера ${serverId}:`, error);
+        console.error(`Error getting server data ${serverId}:`, error);
         return null;
     }
 }
@@ -52,11 +52,11 @@ function createServerCard(serverData) {
             <div class="server-info">
                 <p class="server-connect" onclick="copyToClipboard('${serverData.connect}', this)">
                     connect: ${serverData.connect}
-                    <span class="copy-tooltip">Нажмите, чтобы скопировать</span>
+                    <span class="copy-tooltip">Click to copy</span>
                 </p>
                 <div class="server-status">
                     <span class="online-status ${serverData.status ? 'online' : 'offline'}">
-                        ${serverData.status ? 'Онлайн' : 'Офлайн'}
+                        ${serverData.status ? 'Online' : 'Offline'}
                     </span>
                     <span class="players">
                         <i class="fas fa-users"></i> <span class="players-count">${serverData.numplayers}/${serverData.maxplayers}</span>
@@ -64,7 +64,7 @@ function createServerCard(serverData) {
                 </div>
                 <div class="server-details">
                     <span class="map">
-                        <i class="fas fa-map"></i> Карта: <span class="map-name">${serverData.map || 'Неизвестно'}</span>
+                        <i class="fas fa-map"></i> Map: <span class="map-name">${serverData.map || 'Unknown'}</span>
                     </span>
                 </div>
             </div>
@@ -77,11 +77,11 @@ function updateServerCardData(card, serverData) {
     card.querySelector('.online-status').className =
         `online-status ${serverData.status ? 'online' : 'offline'}`;
     card.querySelector('.online-status').textContent =
-        serverData.status ? 'Онлайн' : 'Офлайн';
+        serverData.status ? 'Online' : 'Offline';
     card.querySelector('.players-count').textContent =
         `${serverData.numplayers}/${serverData.maxplayers}`;
     card.querySelector('.map-name').textContent =
-        serverData.map || 'Неизвестно';
+        serverData.map || 'Unknown';
 }
 
 async function updateAllServers() {
@@ -107,15 +107,15 @@ async function copyToClipboard(text, element) {
         await navigator.clipboard.writeText(text);
 
         const tooltip = element.querySelector('.copy-tooltip');
-        tooltip.textContent = 'Скопировано!';
+        tooltip.textContent = 'Copied!';
         tooltip.classList.add('show');
 
         setTimeout(() => {
-            tooltip.textContent = 'Нажмите, чтобы скопировать';
+            tooltip.textContent = 'Click to copy';
             tooltip.classList.remove('show');
         }, 2000);
     } catch (err) {
-        console.error('Ошибка при копировании:', err);
+        console.error('Error copying:', err);
     }
 }
 
