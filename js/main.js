@@ -17,7 +17,7 @@ async function fetchVersionAndRelease() {
         if (githubResponse.ok) {
             const data = await githubResponse.json();
 
-            // Находим .exe файл
+            
             const exeAsset = data.assets.find(asset =>
                 asset.name.toLowerCase().includes('launcher') &&
                 asset.name.toLowerCase().endsWith('.exe')
